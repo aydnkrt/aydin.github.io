@@ -78,32 +78,26 @@
         }
 
         // Şirket Kaydetme İşlemi
-        function saveCompany() {
-            // Gerekli alanları al
+        function saveCompany(event) {
+            event.preventDefault();
+
+            // Kullanıcıdan veri al
             const companyName = document.getElementById("companyName").value.trim();
             const contactName = document.getElementById("contactName").value.trim();
             const phone = document.getElementById("phone").value.trim();
             const address = document.getElementById("address").value.trim();
             const notes = document.getElementById("notes").value.trim();
 
-            // Alanlar boşsa uyarı ver
+            // Zorunlu alanları kontrol et
             if (!companyName || !contactName || !phone || !address || !notes) {
                 alert("Lütfen tüm zorunlu alanları doldurun!");
-                return;
-            }
-
-            // "Emin misiniz?" sorusu
-            const confirmation = confirm("Emin misiniz? Şirket bilgilerini kaydetmek üzeresiniz.");
-
-            if (!confirmation) {
-                // Eğer kullanıcı onaylamazsa işlemi iptal et
                 return;
             }
 
             // Firma kayıt tarihi
             const registerDate = new Date().toLocaleString("tr-TR");
 
-            // Müşteri numarası oluştur
+            // Müşteri numarası oluşturuluyor
             const customerNumber = generateCustomerNumber();
 
             // Şirket verisini Firestore'a kaydet
@@ -117,16 +111,15 @@
                 registerDate
             };
 
-            // Firestore'a veri kaydetme işlemi
+            // Firebase Firestore'a kaydet
             db.collection("companies").add(companyData)
                 .then(() => {
-                    console.log("Şirket başarıyla kaydedildi!");
                     alert(`Şirket başarıyla kaydedildi!\nMüşteri Numarası: ${customerNumber}`);
-                    window.location.href = "admin.html"; // Admin paneline yönlendir
+                    // Admin paneline yönlendir
+                    window.location.href = "admin.html";
                 })
                 .catch((error) => {
-                    console.error("Hata oluştu: ", error); // Hata mesajını konsola yazdır
-                    alert("Bir hata oluştu: " + error.message); // Kullanıcıya hata mesajı ver
+                    alert("Bir hata oluştu: " + error.message);
                 });
         }
     </script>
@@ -134,7 +127,7 @@
 <body>
     <div class="container">
         <h1>Şirket Oluştur</h1>
-        <form>
+        <form onsubmit="saveCompany(event)">
             <div class="input-group">
                 <label>Firma Adı (Zorunlu)</label>
                 <input type="text" id="companyName" required>
@@ -159,7 +152,7 @@
                 <label>Firma ile İlgili Görüşme Notu (Zorunlu)</label>
                 <textarea id="notes" required></textarea>
             </div>
-            <button type="button" class="submit-btn" onclick="saveCompany()">Kaydet</button>
+            <button type="submit" class="submit-btn">Kaydet</button>
         </form>
     </div>
 </body>
