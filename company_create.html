@@ -78,9 +78,7 @@
         }
 
         // Şirket Kaydetme İşlemi
-        function saveCompany(event) {
-            event.preventDefault(); // Formun varsayılan işlevini engelle
-
+        function saveCompany() {
             // Gerekli alanları al
             const companyName = document.getElementById("companyName").value.trim();
             const contactName = document.getElementById("contactName").value.trim();
@@ -136,7 +134,7 @@
 <body>
     <div class="container">
         <h1>Şirket Oluştur</h1>
-        <form onsubmit="saveCompany(event)">
+        <form>
             <div class="input-group">
                 <label>Firma Adı (Zorunlu)</label>
                 <input type="text" id="companyName" required>
@@ -161,7 +159,7 @@
                 <label>Firma ile İlgili Görüşme Notu (Zorunlu)</label>
                 <textarea id="notes" required></textarea>
             </div>
-            <button type="submit" class="submit-btn">Kaydet</button>
+            <button type="button" class="submit-btn" onclick="saveCompany()">Kaydet</button>
         </form>
     </div>
 </body>
