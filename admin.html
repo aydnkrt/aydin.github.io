@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeka - Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background: #007bff;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            text-align: center;
+        }
+        .menu {
+            list-style: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 15px 0;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .menu a:hover {
+            background: #0056b3;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul class="menu">
+            <li><a href="company_create.html">Şirket Oluştur</a></li>
+            <li><a href="user_create.html">Kullanıcı Oluştur</a></li>
+            <li><a href="invoice_upload.html">Fatura Yükle</a></li>
+            <li><a href="load_add.html">Yük Ekle</a></li>
+            <li><a href="cargo_location.html">Taşımada Olan Yüke Konum Ekle</a></li>
+            <li><a href="company_notes.html">Firma İçin Not Ekle</a></li>
+            <li><a href="offer_send.html">Teklif Gönder</a></li>
+            <li><a href="current_offers.html">Güncel Teklifleri Takip Et</a></li>
+            <li><a href="companies.html">Şirketlerim</a></li> <!-- Şirketlerim menüye eklendi -->
+        </ul>
+    </div>
+    <div class="content">
+        <h1>Hoş geldiniz, Admin!</h1>
+        <p>Menüden bir işlem seçin.</p>
+    </div>
+</body>
+</html>
