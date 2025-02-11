@@ -1,59 +1,50 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
+    <title>Firebase Test</title>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script>
-        // ... (Firebase initialization - REMOVE IN PRODUCTION) ...
-
-        function saveCompany(event) {
-            event.preventDefault();
-
-            // ... (Get form values) ...
-            const taxNumber = document.getElementById("taxNumber").value.trim(); // Get tax number
-
-            // ... (Validation - Add format validation here) ...
-
-            const companyData = {
-                customerNumber,
-                companyName,
-                contactName,
-                phone,
-                address,
-                notes,
-                taxNumber, // Include tax number
-                registerDate: new Date().toLocaleString("tr-TR")
-            };
-
-            // Show loading indicator (implement this visually)
-            document.getElementById("loading-indicator").style.display = "block";
-
-            db.collection("companies").add(companyData)
-                .then(() => {
-                    alert(`Şirket başarıyla kaydedildi!\nMüşteri Numarası: ${customerNumber}`);
-                    document.getElementById("companyForm").reset(); // Clear the form
-                    window.location.href = "admin.html?customerNumber=" + customerNumber; // Redirect with customerNumber
-                })
-                .catch((error) => {
-                    console.error("Error saving company:", error); // Log the error for debugging
-                    alert("Bir hata oluştu: " + error.message); // Display a more user-friendly message
-                })
-                .finally(() => {
-                    // Hide loading indicator
-                    document.getElementById("loading-indicator").style.display = "none";
-                });
-        }
-
-        window.onload = function() {
-            document.getElementById("companyName").focus(); // Focus on the first input
+        // Firebase yapılandırması (GÜVENLİ DEĞİL - KULLANMAYIN)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY", // GÜVENLİK AÇIĞI!
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID",
+            measurementId: "YOUR_MEASUREMENT_ID" // İsteğe bağlı
         };
+
+        // Firebase'i başlatma (GÜVENLİ DEĞİL - KULLANMAYIN)
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore(app);
+
+        function veriEkle() {
+            const ad = document.getElementById("ad").value;
+            const soyad = document.getElementById("soyad").value;
+
+            db.collection("test").add({ // "test" adında bir koleksiyon oluşturduk
+                ad: ad,
+                soyad: soyad
+            })
+            .then(() => {
+                console.log("Veri eklendi.");
+                alert("Veri eklendi.");
+                document.getElementById("ad").value = "";
+                document.getElementById("soyad").value = "";
+            })
+            .catch((error) => {
+                console.error("Hata:", error);
+                alert("Hata oluştu.");
+            });
+        }
     </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Şirket Oluştur</h1>
-        <form id="companyForm" onsubmit="saveCompany(event)">
-            <div id="loading-indicator" style="display:none;">Loading...</div>  </form>
-    </div>
+    <h1>Firebase Test</h1>
+    Ad: <input type="text" id="ad"><br>
+    Soyad: <input type="text" id="soyad"><br>
+    <button onclick="veriEkle()">Ekle</button>
 </body>
 </html>
