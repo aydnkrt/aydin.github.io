@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeka - Admin Giriş</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .login-container h1 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 20px;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+    <script>
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (username === "admin" && password === "123456") {
+                window.location.href = "admin.html";
+            } else {
+                alert("Hatalı kullanıcı adı veya şifre!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Adeka Lojistik</h1>
+        <h2>Admin Panel</h2>
+        <form onsubmit="login(event)">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Kullanıcı Adı" value="admin" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Şifre" value="123456" required>
+            </div>
+            <button type="submit" class="login-btn">Giriş Yap</button>
+        </form>
+    </div>
+</body>
+</html>
