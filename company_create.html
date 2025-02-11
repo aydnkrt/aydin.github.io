@@ -94,6 +94,14 @@
                 return;
             }
 
+            // "Emin misiniz?" sorusu
+            const confirmation = confirm("Emin misiniz? Şirket bilgilerini kaydetmek üzeresiniz.");
+
+            if (!confirmation) {
+                // Eğer kullanıcı onaylamazsa işlemi iptal et
+                return;
+            }
+
             // Firma kayıt tarihi
             const registerDate = new Date().toLocaleString("tr-TR");
 
